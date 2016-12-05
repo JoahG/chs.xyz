@@ -183,7 +183,7 @@ class App extends React.Component {
             login={ () => this.login() }
             loggedIn={ this.state.loggedIn }
             auth={ this.state.auth }
-            closeDrawer={ () => this.toggleLeftDrawerOpen(false) } />
+            closeDrawer={ () => { if (this.state.drawersAsOverlays) this.toggleLeftDrawerOpen(false); } } />
         </Drawer>
         <main style={ {
           maxWidth: `calc(100vw - (${ 
@@ -211,7 +211,9 @@ class App extends React.Component {
                 ...el.props,
                 loggedIn: this.state.loggedIn,
                 auth: this.state.auth,
-                login: () => this.login()
+                login: () => this.login(),
+                appWidth: this.state.width,
+                appHeight: this.state.height
               });
             })
           }
@@ -231,7 +233,7 @@ class App extends React.Component {
             loggedIn={ this.state.loggedIn } 
             mine={ true } 
             auth={ this.state.auth }
-            closeDrawer={ () => this.toggleRightDrawerOpen(false) } />
+            closeDrawer={ () => { if (this.state.drawersAsOverlays) this.toggleRightDrawerOpen(false); } } />
         </Drawer>
       </div>
     );

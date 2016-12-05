@@ -479,7 +479,9 @@ class BoardPage extends React.Component {
           background: `white`,
           borderBottomWidth: 0,
           bottom: this.state.logOpen ? 0 : -360,
-          left: 270
+          left: this.props.appWidth > 991 ? 270 : 0,
+          right: this.props.appWidth > 991 ? `auto` : 0,
+          margin: `auto`
         } }>
           <span style={ {
             height: 40,
