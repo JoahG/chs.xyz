@@ -65,6 +65,8 @@ class BoardPage extends React.Component {
           black_user: game.black_user || {},
           spectators: game.spectators || [],
           canSwitch: game.canSwitch,
+          activePiece: ``,
+          hoveringPiece: ``,
           playing_as: this.props.loggedIn ?
                   this.props.auth.uid === game.white ?
                   `white` :
@@ -164,7 +166,7 @@ class BoardPage extends React.Component {
 
   selectPiece(id) {
     this.setState({
-      activePiece: id
+      activePiece: (id === this.state.activePiece ? `` : id)
     });
   }
 
