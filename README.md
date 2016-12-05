@@ -20,7 +20,8 @@ Report bugs by [submitting a new issue](https://github.com/chsxyz/chsxyz.github.
 
 ## More Info
 
-chs.xyz uses the [chess.js](https://github.com/JoahG/chess.js) Chess API by Joah Gerstenberg
+   - chs.xyz uses the [chess.js](https://github.com/JoahG/chess.js) Chess API by Joah Gerstenberg
+   - chess piece design was made by Sergey Krivenko/Shutterstock.com (lol)
 
 ## Author
 
