@@ -153,9 +153,15 @@ class GameList extends React.Component {
             !this.props.mine ? (
               <div>
                 <Subheader>More</Subheader>
+                <a
+                  style={ { textDecoration: `none`, color: `black` } }
+                  href="https://github.com/chsxyz/chsxyz.github.io/issues/new"
+                  target="_blank">
+                  <ListItem primaryText="Submit a bug report" />
+                </a>
                 <a 
                   style={ { textDecoration: `none`, color: `black` } } 
-                  href="http://github.com/joahg/chs.xyz" 
+                  href="https://github.com/chsxyz/chsxyz.github.io" 
                   target="_blank">
                   <ListItem primaryText="chs.xyz on GitHub" />
                 </a>

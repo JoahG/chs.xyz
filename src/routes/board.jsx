@@ -310,7 +310,7 @@ class BoardPage extends React.Component {
                       onClick={ 
                         () => this.tweet(`I'm looking for a player to 
                                           play white
-                                          http://chs.xyz/${ this.props.params.slug }`) 
+                                          https://chs.xyz/${ this.props.params.slug }`) 
                       } 
                       style={ { cursor: `pointer` } }>
                       <span style={ {
@@ -401,7 +401,7 @@ class BoardPage extends React.Component {
                       onClick={ 
                         () => this.tweet(`I'm looking for a player to 
                                           play black
-                                          http://chs.xyz/${ this.props.params.slug }`) 
+                                          https://chs.xyz/${ this.props.params.slug }`) 
                       } 
                       style={ { cursor: `pointer` } }>
                       <span style={ {
