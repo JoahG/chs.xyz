@@ -5,6 +5,7 @@ import { browserHistory } from 'react-router';
 import ChessBoard from '../vendor/chess.js';
 import Board from '../components/Board.jsx';
 import db from '../helpers/ApiHelper.js';
+import Paper from 'material-ui/Paper';
 
 let game_unparsed, dbListener;
 
@@ -453,7 +454,8 @@ class BoardPage extends React.Component {
           <h3 style={ {
             textAlign: `center`,
             margin: 0,
-            marginTop: 15
+            marginTop: 15,
+            display: `none` // TODO: add users to spectating when game is loaded
           } }>
             { this.state.spectators.length } users spectating
           </h3>
@@ -468,13 +470,12 @@ class BoardPage extends React.Component {
             capturePiece={ (i) => this.capturePiece(i) }
             setHoveringPiece={ (i) => this.setHoveringPiece(i) } />
         </section>
-        <div style={ { 
+        <Paper style={ { 
           textAlign: `left`,
           position: `absolute`,
           width: 300,
           height: 400,
           background: `white`,
-          border: `2px solid #0C0000`,
           borderBottomWidth: 0,
           bottom: this.state.logOpen ? 0 : -360,
           left: 270
@@ -518,7 +519,7 @@ class BoardPage extends React.Component {
               `no moves.`
             }
           </div>
-        </div>
+        </Paper>
 
         <div style={ { 
           textAlign: `left`,
@@ -529,7 +530,8 @@ class BoardPage extends React.Component {
           border: `2px solid #0C0000`,
           borderBottomWidth: 0,
           bottom: this.state.chatOpen ? 0 : -360,
-          right: 270
+          right: 270,
+          display: `none` // TODO: add chat functionality
         } } ref="chat">
           <span style={ {
             height: 40,
