@@ -10,7 +10,7 @@ class IndexPage extends React.Component {
   render() {
     return (
       <div>
-        not currently in a game.
+        <h2>Select a game on the left to get started.</h2>
       </div>
     );
   }
