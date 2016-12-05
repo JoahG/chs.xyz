@@ -291,7 +291,7 @@ class BoardPage extends React.Component {
                   <div>
                     {
                       this.state.canSwitch ? (
-                        <div onClick={ () => this.switchTo(`white`) } style={ { cursor: `pointer` } }>
+                        <div onTouchTap={ () => this.switchTo(`white`) } style={ { cursor: `pointer` } }>
                           <span style={ {
                             verticalAlign: `middle`,
                             display: `inline-block`
@@ -326,7 +326,7 @@ class BoardPage extends React.Component {
                   </div>
                 ) : (
                   !this.props.loggedIn ? (
-                    <div onClick={ () => this.props.login() } style={ { cursor: `pointer` } }>
+                    <div onTouchTap={ () => this.props.login() } style={ { cursor: `pointer` } }>
                       <span style={ {
                         verticalAlign: `middle`,
                         display: `inline-block`
@@ -335,7 +335,7 @@ class BoardPage extends React.Component {
                       </span>
                     </div>
                   ) : (
-                    <div onClick={ () => this.joinGame() } style={ { cursor: `pointer` } }>
+                    <div onTouchTap={ () => this.joinGame() } style={ { cursor: `pointer` } }>
                       <span style={ {
                         verticalAlign: `middle`,
                         display: `inline-block`
@@ -381,7 +381,7 @@ class BoardPage extends React.Component {
                   <div>
                     {
                       this.state.canSwitch ? (
-                        <div onClick={ () => this.switchTo(`black`) } style={ { cursor: `pointer` } }>
+                        <div onTouchTap={ () => this.switchTo(`black`) } style={ { cursor: `pointer` } }>
                           <span style={ {
                             verticalAlign: `middle`,
                             display: `inline-block`
@@ -416,7 +416,7 @@ class BoardPage extends React.Component {
                   </div>
                 ) : (
                   !this.props.loggedIn ? (
-                    <div onClick={ () => this.props.login() } style={ { cursor: `pointer` } }>
+                    <div onTouchTap={ () => this.props.login() } style={ { cursor: `pointer` } }>
                       <span style={ {
                         verticalAlign: `middle`,
                         display: `inline-block`
@@ -425,7 +425,7 @@ class BoardPage extends React.Component {
                       </span>
                     </div>
                   ) : (
-                    <div onClick={ () => this.joinGame() } style={ { cursor: `pointer` } }>
+                    <div onTouchTap={ () => this.joinGame() } style={ { cursor: `pointer` } }>
                       <span style={ {
                         verticalAlign: `middle`,
                         display: `inline-block`
@@ -488,7 +488,7 @@ class BoardPage extends React.Component {
             display: `block`,
             padding: `0 15px`,
             cursor: `pointer`
-          } } onClick={ () => this.toggleLogOpen() }>Game Log</span>
+          } } onTouchTap={ () => this.toggleLogOpen() }>Game Log</span>
           <div style={ {
             padding: 15
           } }>
@@ -541,7 +541,7 @@ class BoardPage extends React.Component {
             display: `block`,
             padding: `0 15px`,
             cursor: `pointer`
-          } } onClick={ () => this.toggleChatOpen() }>Game Chat</span>
+          } } onTouchTap={ () => this.toggleChatOpen() }>Game Chat</span>
           <div style={ {
             padding: 15
           } }>

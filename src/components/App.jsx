@@ -5,7 +5,6 @@ import GameList from './GameList.jsx';
 import db from '../helpers/ApiHelper.js';
 import Piece from './Piece.jsx';
 import AppBar from 'material-ui/AppBar';
-import IconButton from 'material-ui/IconButton';
 import FlatButton from 'material-ui/FlatButton';
 import Drawer from 'material-ui/Drawer';
 
@@ -17,8 +16,11 @@ class App extends React.Component {
       loggedIn: false,
       auth: {},
 
-      leftDrawerOpen: true,
-      rightDrawerOpen: true
+      leftDrawerOpen: window.innerWidth > 991,
+      rightDrawerOpen: window.innerWidth > 991,
+      drawersAsOverlays: window.innerWidth < 991,
+      width: window.innerWidth,
+      height: window.innerHeight
     };
   }
 
@@ -38,6 +40,16 @@ class App extends React.Component {
         });
       });
     }
+
+    window.onresize = () => {
+      this.setState({
+        leftDrawerOpen: window.innerWidth > 991,
+        rightDrawerOpen: window.innerWidth > 991,
+        drawersAsOverlays: window.innerWidth < 991,
+        width: window.innerWidth,
+        height: window.innerHeight
+      });
+    };
   }
 
   login() {
@@ -64,6 +76,30 @@ class App extends React.Component {
     return db.unauth();
   }
 
+  toggleLeftDrawerOpen(open = !this.state.leftDrawerOpen) {
+    let state = {
+      leftDrawerOpen: open,
+    };
+
+    if (this.state.drawersAsOverlays) {
+      state.rightDrawerOpen = false;
+    }
+
+    this.setState(state);
+  }
+
+  toggleRightDrawerOpen() {
+    let state = {
+      rightDrawerOpen: !this.state.rightDrawerOpen
+    };
+
+    if (this.state.drawersAsOverlays) {
+      state.leftDrawerOpen = false;
+    }
+
+    this.setState(state);
+  }
+
   render() {
     return (
       <div>
@@ -71,45 +107,102 @@ class App extends React.Component {
           title="chs.xyz"
           zDepth={ 2 }
           style={ {
-            background: `#231F20`
+            background: `#231F20`,
+            padding: 0
           } }
           iconStyleLeft={ {
-            marginTop: 0
+            marginTop: 0,
+            marginLeft: 0
           } }
           iconElementLeft={ 
-            <IconButton style={ {
+            <FlatButton style={ {
               height: 64
-            } }>
-              <Piece color="white" type="knight" />
-            </IconButton>
+            } } onTouchTap={ () => this.toggleLeftDrawerOpen() }>
+              <Piece color="white" type="knight" style={ { maxHeight: 40, marginTop: 12 } } />
+            </FlatButton>
           }
+          iconStyleRight={ {
+            marginRight: 0,
+            marginTop: 0
+          } }
           iconElementRight={ 
-            !this.state.loggedIn ? (
-              <FlatButton onClick={ () => this.login() }>
-                Login with Twitter
+            <div>
+              {
+                !this.state.loggedIn ? (
+                  <FlatButton onTouchTap={ () => this.login() } style={ {
+                    paddingLeft: 15,
+                    paddingRight: 15,
+                    color: `white`,
+                    height: 64,
+                    verticalAlign: `middle`
+                  } }>
+                    Login
+                    {
+                      this.state.width > 600 ?
+                      ` with Twitter` :
+                      ``
+                    }
+                  </FlatButton>
+                ) : (
+                  <FlatButton onTouchTap={ () => this.logout() } style={ {
+                    paddingLeft: 15,
+                    paddingRight: 15,
+                    color: `white`,
+                    height: 64,
+                    verticalAlign: `middle`
+                  } }>
+                    {
+                      this.state.width > 600 ? 
+                      `Logged in as ${ this.state.auth.displayName }, ` :
+                      ``
+                    }
+                    Logout?
+                  </FlatButton>
+                )
+              }
+
+              <FlatButton style={ {
+                height: 64,
+                verticalAlign: `middle`
+              } } onTouchTap={ () => this.toggleRightDrawerOpen() }>
+                <Piece color="white" type="king" style={ { maxHeight: 40, marginTop: 12 } } />
               </FlatButton>
-            ) : (
-              <FlatButton onClick={ () => this.logout() }>
-                Logged in as { this.state.auth.displayName }, Logout?
-              </FlatButton>
-            )
+            </div>
           }
         />
         <Drawer 
           open={ this.state.leftDrawerOpen }
+          docked={ !this.state.drawersAsOverlays }
+          onRequestChange={ (o) => this.toggleLeftDrawerOpen(o) }
           containerStyle={ {
-            height: `calc(100% - 64px)`,
-            bottom: 0,
-            top: `auto`
+            height: !this.state.drawersAsOverlays ? `calc(100% - 64px)` : `100%`,
+            bottom: !this.state.drawersAsOverlays ? 0 : `auto`,
+            top: this.state.drawersAsOverlays ? 0 : `auto`
           } }>
           <GameList
             login={ () => this.login() }
             loggedIn={ this.state.loggedIn }
-            auth={ this.state.auth } />
+            auth={ this.state.auth }
+            closeDrawer={ () => this.toggleLeftDrawerOpen(false) } />
         </Drawer>
         <main style={ {
-          maxWidth: `calc(100vw - 512px)`,
-          margin: `auto`,
+          maxWidth: `calc(100vw - (${ 
+                                      this.state.leftDrawerOpen &&
+                                      !this.state.drawersAsOverlays ? 
+                                      `256px` : 
+                                      `0px`
+                                    } + 
+                                   ${ 
+                                      this.state.rightDrawerOpen &&
+                                      !this.state.drawersAsOverlays ? 
+                                      `256px` : 
+                                      `0px`
+                                    }))`,
+          marginTop: `auto`,
+          marginRight: this.state.rightDrawerOpen && !this.state.drawersAsOverlays ? `256px` : `auto`,
+          marginBottom: `auto`,
+          marginLeft: this.state.leftDrawerOpen && !this.state.drawersAsOverlays ? `256px` : `auto`,
+          transition: `300ms all ease-in-out`,
           textAlign: `center`
         } }>
           { 
@@ -125,17 +218,20 @@ class App extends React.Component {
         </main>
         <Drawer 
           open={ this.state.rightDrawerOpen }
+          docked={ !this.state.drawersAsOverlays }
+          onRequestChange={ (o) => this.toggleRightDrawerOpen(o) }
           openSecondary={ true }
           containerStyle={ {
-            height: `calc(100% - 64px)`,
-            bottom: 0,
-            top: `auto`
+            height: !this.state.drawersAsOverlays ? `calc(100% - 64px)` : `100%`,
+            bottom: !this.state.drawersAsOverlays ? 0 : `auto`,
+            top: this.state.drawersAsOverlays ? 0 : `auto`
           } }>
           <GameList 
             login={ () => this.login() } 
             loggedIn={ this.state.loggedIn } 
             mine={ true } 
-            auth={ this.state.auth } />
+            auth={ this.state.auth }
+            closeDrawer={ () => this.toggleRightDrawerOpen(false) } />
         </Drawer>
       </div>
     );

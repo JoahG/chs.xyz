@@ -134,6 +134,7 @@ class GameList extends React.Component {
                   )
                 }
                 containerElement={ <Link to={ `/${ game.slug }` } /> }
+                onTouchTap={ () => this.props.closeDrawer() }
               />
             ))
           }

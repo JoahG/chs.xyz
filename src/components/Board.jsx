@@ -95,7 +95,7 @@ const Board = ({
                       cursor: `pointer`
                     };
 
-                    props.onClick = () => movePiece(id);
+                    props.onTouchTap = () => movePiece(id);
                   }
 
                   if (possibilities[1].indexOf(id) > -1) { // Possible Capture
@@ -105,7 +105,7 @@ const Board = ({
                       cursor: `pointer`
                     };
 
-                    props.onClick = () => capturePiece(id);
+                    props.onTouchTap = () => capturePiece(id);
                   }
 
                   if (guards.indexOf(id) > -1) { // Guarding
@@ -124,7 +124,7 @@ const Board = ({
                         cursor: `pointer`
                       };
 
-                      props.onClick = () => selectPiece(id);
+                      props.onTouchTap = () => selectPiece(id);
                     }
 
                     if (piece.type === `king` && (
