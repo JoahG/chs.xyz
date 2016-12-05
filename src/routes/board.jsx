@@ -284,7 +284,15 @@ class BoardPage extends React.Component {
                       verticalAlign: `middle`,
                       display: `inline-block`
                     } }>
-                      <strong>{ playing_as == `white` ? `You` : this.state.white_user.name }</strong>
+                      <strong>
+                        { 
+                          playing_as == `white` ? 
+                          `You` : 
+                          this.props.appWidth >= 991 ?
+                          this.state.white_user.name :
+                          this.state.white_user.name.split(` `)[0] 
+                        }
+                      </strong>
                     </span>
                   </div>
                 ) : playing_as.length > 0 ? (
@@ -374,7 +382,15 @@ class BoardPage extends React.Component {
                       verticalAlign: `middle`,
                       display: `inline-block`
                     } }>
-                      <strong>{ playing_as == `black` ? `You` : this.state.black_user.name }</strong>
+                      <strong>
+                        { 
+                          playing_as == `black` ? 
+                          `You` : 
+                          this.props.appWidth >= 991 ?
+                          this.state.black_user.name :
+                          this.state.black_user.name.split(` `)[0] 
+                        }
+                      </strong>
                     </span>
                   </div>
                 ) : playing_as.length > 0 ? (

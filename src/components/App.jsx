@@ -39,6 +39,10 @@ class App extends React.Component {
           auth: user
         });
       });
+    } else if (this.state.drawersAsOverlays) {
+      this.setState({
+        leftDrawerOpen: true
+      });
     }
 
     window.onresize = () => {
