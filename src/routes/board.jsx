@@ -32,14 +32,15 @@ class BoardPage extends React.Component {
     this.init();
   }
 
-  uninit(slug = this.props.params.slug) {
+  uninit() {
+    //slug = this.props.params.slug
     db.removeBinding(dbListener);
 
-    db.update(`games/${ slug }`, {
-      data: {
-        spectators: this.state.spectators.filter((uid) => !uid == this.props.auth.uid)
-      }
-    });
+    // db.update(`games/${ slug }`, {
+    //   data: {
+    //     spectators: this.state.spectators.filter((uid) => !uid == this.props.auth.uid)
+    //   }
+    // });
   }
 
   init(slug = this.props.params.slug) {
