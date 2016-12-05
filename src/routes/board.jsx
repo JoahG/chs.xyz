@@ -214,9 +214,9 @@ class BoardPage extends React.Component {
   }
 
   tweet(msg) {
-    window.location = `http://twitter.com/intent/tweet?via=chsxyz` + 
-                      `&hashtags=lookingforchessplayer` + 
-                      `&text=${ msg.replace(/\s+/gi, ` `).replace(/\n/gi, ``) }`;
+    return `http://twitter.com/intent/tweet?via=chsxyz` + 
+           `&hashtags=lookingforchessplayer` + 
+           `&text=${ msg.replace(/\s+/gi, ` `).replace(/\n/gi, ``) }`;
   }
 
   render() {
@@ -307,20 +307,19 @@ class BoardPage extends React.Component {
                         </div>
                       )
                     }
-                    <div 
-                      onClick={ 
-                        () => this.tweet(`I'm looking for a player to 
-                                          play white
-                                          https://chs.xyz/${ this.props.params.slug }`) 
-                      } 
-                      style={ { cursor: `pointer` } }>
+                    <a 
+                      target="_blank"
+                      href={ this.tweet(`I'm looking for a player to 
+                                         play white
+                                         https://chs.xyz/${ this.props.params.slug }`) } 
+                      style={ { cursor: `pointer`, display: `block`, color: `black` } }>
                       <span style={ {
                         verticalAlign: `middle`,
                         display: `inline-block`
                       } }>
                         <strong>[ Invite your followers to join ]</strong>
                       </span>
-                    </div>
+                    </a>
                   </div>
                 ) : (
                   !this.props.loggedIn ? (
@@ -398,20 +397,19 @@ class BoardPage extends React.Component {
                         </div>
                       )
                     }
-                    <div 
-                      onClick={ 
-                        () => this.tweet(`I'm looking for a player to 
-                                          play black
-                                          https://chs.xyz/${ this.props.params.slug }`) 
-                      } 
-                      style={ { cursor: `pointer` } }>
+                    <a 
+                      target="_blank"
+                      href={ this.tweet(`I'm looking for a player to 
+                                         play black
+                                         https://chs.xyz/${ this.props.params.slug }`) } 
+                      style={ { cursor: `pointer`, display: `block`, color: `black` } }>
                       <span style={ {
                         verticalAlign: `middle`,
                         display: `inline-block`
                       } }>
                         <strong>[ Invite your followers to join ]</strong>
                       </span>
-                    </div>
+                    </a>
                   </div>
                 ) : (
                   !this.props.loggedIn ? (
