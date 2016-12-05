@@ -21,7 +21,9 @@ config.module.loaders.push(
 );
 
 config.devServer = {
-  outputPath: path.join(__dirname, 'dist')
+  outputPath: path.join(__dirname, 'dist'),
+  historyApiFallback: true,
+  publicPath: '/dist/'
 };
 
 config.eslint = {
