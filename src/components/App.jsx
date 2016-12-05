@@ -70,6 +70,9 @@ class App extends React.Component {
         <AppBar
           title="chs.xyz"
           zDepth={ 2 }
+          style={ {
+            background: `#231F20`
+          } }
           iconStyleLeft={ {
             marginTop: 0
           } }
