@@ -59,6 +59,8 @@ class App extends React.Component {
       auth: {}
     });
 
+    localStorage.removeItem(`identity`);
+
     return db.unauth();
   }
 
