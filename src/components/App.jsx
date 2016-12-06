@@ -39,7 +39,7 @@ class App extends React.Component {
           auth: user
         });
       });
-    } else if (this.state.drawersAsOverlays) {
+    } else if (window.innerWidth < 991) {
       this.setState({
         leftDrawerOpen: true
       });
