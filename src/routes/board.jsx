@@ -491,7 +491,6 @@ class BoardPage extends React.Component {
           textAlign: `left`,
           position: `absolute`,
           width: 300,
-          overflow: 'auto',
           height: 400,
           background: `white`,
           borderBottomWidth: 0,
@@ -509,7 +508,10 @@ class BoardPage extends React.Component {
             cursor: `pointer`
           } } onTouchTap={ () => this.toggleLogOpen() }>Game Log</span>
           <div style={ {
-            padding: 15
+            padding: 15,
+            maxHeight: `calc(100% - 40px)`,
+            overflow: `auto`,
+            boxSizing: `border-box`
           } }>
             {
               this.state.board.log.length > 0 ? (
