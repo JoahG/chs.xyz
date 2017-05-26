@@ -491,6 +491,7 @@ class BoardPage extends React.Component {
           textAlign: `left`,
           position: `absolute`,
           width: 300,
+          overflow: 'auto',
           height: 400,
           background: `white`,
           borderBottomWidth: 0,
